@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Register</title>
+    </head>
+    {% extends "template.html" %}
+    {% block content %}
+    {%with messages = get_flashed_messages(with_categories = True) %}
+        {%for category, message in messages%}
+            <div class={{category}}> {{ message }}</div>
+        {%endfor%}
+    {%endwith%}
+    <body>
+        <div class = "register">
+            <form action="/register", method="POST"> 
+                <label for="username">User name</label>
+                <input type="text" name="username" placeholder="username">
+
+                <label for="name">Name</label>
+                <input type="text" name="name" placeholder="name">
+
+                <label for="email">Email</label>
+                <input type="text" name="email" placeholder="123@mail.com">
+  
+                <label for="password">Password</label>
+                <input type="password" name="password" placeholder="password">
+
+                <label for="checkpassword">Confirm your Password</label>
+                <input type="password" name="checkpassword" placeholder="enter your password again">
+
+                <p>User Type</p>
+                <select name = "register type">
+                    <option value = "student">Student</option>
+                    <option value = "instructor">Instructor</option>
+                </select>
+  
+                <button type="Login">Submit</button>
+                <h3 class="login-container"><a href="login" >Login&nbsp;</a></h3>
+
+            </form>
+        </div>
+    </body>
+    {% endblock content%}
+</html>

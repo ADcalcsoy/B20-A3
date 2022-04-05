@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Administration information</title>
+    </head>
+
+    <body>
+        {% extends "template.html" %}
+        {% block content %}
+        <h1 class="text"><b>Administration Info</b></h1>
+        {%with messages = get_flashed_messages(with_categories = True) %}
+            {%if messages%}
+                {%for category, message in messages%}
+                    <div class={{category}}>{{category}} - {{ message }}</div>
+                {%endfor%}
+            {%endif%}
+        {%endwith%}
+        <table class="grades">
+            <tr>
+                <th>Course id </th>
+                <th>Student </th>
+            </tr>
+            
+            {% for grades in grade_result%}
+            <tr>
+                <td> {{ grades[0] }} </td>
+                <td> {{ grades[1] }} </td>
+            </tr>
+            {%endfor%}
+        </table>
+        <div class = "regrade">
+            <form action="/administration", method="POST"> 
+                <label for="student">New Student: </label>
+                <input type="text" name="student" placeholder="student">
+                <br>
+                <label for="course_id">On Course: </label>
+                <input type="text" name="course_id" placeholder="course_id">
+                <br>
+                <input type="submit" value = "Add"/>
+            </form>
+        </div>
+
+        {% endblock %}
+        </table>
+    </body>
+
+</html>
