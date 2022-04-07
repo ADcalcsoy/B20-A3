@@ -579,5 +579,3 @@ def add_account(info):
     db.session.commit()
 
 
-
-db.create_all()
