@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Login</title>
+        <link rel="stylesheet" href="../static/css/styles.css" >
+        <link rel="stylesheet" href="../static/css/login.css" >
+    </head>
+    {% extends "template.html" %}
+    {% block content %}
+    {%with messages = get_flashed_messages(with_categories = True) %}
+        {%for category, message in messages%}
+            <div class={{category}}>{{category}} - {{ message }}</div>
+        {%endfor%}
+    {%endwith%}
+    <body>
+        <div class = "login">
+            <form action="/login", method="POST"> 
+                <label for="username">User name</label>
+                <input type="text" name="username" placeholder="username">
+  
+                <label for="password">Password</label>
+                <input type="password" name="password" placeholder="password">
+                
+                <p>User Type</p>
+                <select name = "register type">
+                    <option value = "student">Student</option>
+                    <option value = "instructor">Instructor</option>
+                </select>   
+
+                <button type="Login">Login</button>
+                <h3 class="register-container"><a href="register" >register&nbsp;</a></h3>
+
+            </form>
+        </div>
+    </body>
+    {% endblock content%}
+</html>
+
+

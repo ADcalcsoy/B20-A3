@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Home</title>
+    </head>
+
+    <body>
+        <!-- welcome message -->
+        {% extends "template.html" %}
+        {% block content %}
+        {%with messages = get_flashed_messages(with_categories = True) %}
+        {%for category, message in messages%}
+            <div class={{category}}>{{username}} - {{ message }}</div>
+        {%endfor%}
+        {%endwith%}
+        <!-- some content -->
+        <h1 class="text"> Welcome to CSCB20!</h1> 
+        <div class= "text">
+            <h2 >course Description</h2>
+            <p >A practical introduction to databases and Web app development. 
+                Databases: terminology and applications; creating, querying and updating databases; 
+                the entity-relationship model for database design. Web documents and applications: static 
+                and interactive documents; Web servers and dynamic server-generated content; Web application 
+                development and interface with databases.</p>
+
+            <p><b>Prerequisite:</b>  Some experience with programming in an 
+                imperative language such as Python, Java or C.</p>
+
+            <p><b>Exclusion:</b> This course may not be taken after - or concurrently with 
+                - any C- or D-level CSC course.</p>
+            
+            <p><b>Syllabus: </b><a href="/download/syllabus">Syllabus</a></p>
+            <br>
+
+            <h2>Instructor</h2>
+            <div class="inlineText">
+                <p><h3>Dr. Anna Bretscher</h3></p>
+                <p><h3>Email:  <a href="mailto:bretscher@utsc.utoronto.ca">
+                    bretscher@utsc.utoronto.ca</a></h3></p>
+                <p><h3>Office:</h3>    IC493</p>
+                <p><h3>Phone:</h3>  (416)208-4745</p>
+                <p><h3>Lectures</h3>  Mondays 9:15-11:00 in HW 216</p>
+                <p><h3>Office Hours</h3>	W 11:00-12:00</p>
+            </div>
+        </div>
+        
+        
+        {% endblock %}
+    </body>
+
+</html>

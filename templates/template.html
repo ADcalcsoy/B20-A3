@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Home</title>
+        <!-- load css and js, though we don't have time for js -->
+        <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css') }}">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/login.css') }}">
+        <script type = "text/javascript" src = "{{url_for('static', filename='script/template.js') }}"></script>
+    </head>
+
+    <body id = "heading-container">
+        <br>
+        {%if session.name %}
+        <!-- sidepanel -->
+            <div class ="mySidepanel">
+                <!-- User image, user name and logout -->
+                <figure>
+                    <img src = "../static/image/user_image.png" class = "userimage">
+                    <figcaption>{{ session.char_name }}&nbsp;</figcaption>
+                    <figcaption><a href="logout">logout&nbsp;</a>&nbsp;</figcaption>
+                </figure>
+                
+                <h3><a href="/" >Home&nbsp;</a></h3>
+                <h3><a href="register" >Register&nbsp;</a></h3>
+                <!-- need to dispaly different page name to different users -->
+                {%if session.usertype == "student"%}
+                    <h3><a href="regrade" >Regrade&nbsp;</a></h3>
+                {% else %}
+                    <h4><a href="regrade" >Regrade Requests&nbsp;</a></h4>
+                {%endif%}
+                <h3><a href="grades" >Grades&nbsp;</a></h3>
+                <h3><a href="calendar" >Calendar&nbsp;</a></h3>
+                <h3><a href="lectures">Lectures&nbsp;</a></h3>
+                <h3><a href="tutorials">Tutorials&nbsp;</a></h3>
+                <h3><a href="feedback">Anon Feedback&nbsp;</a></h3>
+                <!-- we want this part at the buttom, admistration page only available for instructor-->
+                {%if session.usertype == "instructor"%}
+                    <h3><a href="administration">Administration&nbsp;</a></h3>
+                {%endif%}
+                <h3><a href="assignment">Assignment&nbsp;</a></h3>
+                
+            </div>
+            <!-- the heading -->
+            <div class="heading"><h1>CSCB20</h1></div>
+        {%endif%}
+
+        {% block content %}
+        {% endblock content%}
+
+    </body>
+    <!-- footer -->
+    <footer class="footer">
+        <p><a href="https://www.utsc.utoronto.ca/cms/faculty-of-mathematics">Faculty of 
+            Computer Science at UofT</a></p>
+        <p>Authors of Images: Bison仓鼠， 木shiyo. We really like the pictures, and appreciate your works.</p>
+        <p>Made by David & Max</p>
+    </footer>
+</html>

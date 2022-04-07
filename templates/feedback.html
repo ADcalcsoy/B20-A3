@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Feedback</title>
+    </head>
+
+    <body>
+        {% extends "template.html" %}
+        {% block content %}
+        <!--We want to have this page display different info for different users-->
+        
+        <!--First check if the usertype is student, then we show them a form to input feedback information-->
+
+        {% if usertype == "student"%}
+        <h1 class="text"><b>Feedback Form</b></h1>
+        <!--Displays flash messages-->
+            {%with messages = get_flashed_messages(with_categories = True) %}
+            {%if username %}
+                {%if messages%}
+                    {%for category, message in messages%}
+                        <div class={{category}}>{{username}}, {{ message }}</div>
+                    {%endfor%}
+                {%endif%}
+            {%else%}
+                {%if messages%}
+                    {%for category, message in messages%}
+                        <div class={{category}}>{{category}} - {{ message }}</div>
+                    {%endfor%}
+                {%endif%}
+            {%endif%}
+            {%endwith%}
+            <!--The form that gets input-->
+            <div class = "feedback">
+                <form action="/feedback", method="POST"> 
+                    <label for="instructor">To Instructor: </label>
+                    <input type="text" name="instructor" placeholder="instructor">
+                    <br>
+                    <label for="course_id">On Course: </label>
+                    <input type="text" name="course_id" placeholder="course_id">
+                    <br>
+                    <label for="q1">What do you like about the instructor teaching?</label><br>
+                    <textarea type="q1" name="q1" placeholder="..."></textarea>
+                    <br>
+                    <label for="q2">What do you recommend the instructor to do to improve their teaching?</label><br>
+                    <textarea type="q2" name="q2" placeholder="..."></textarea>
+                    <br>
+                    <label for="q3">What do you like about the labs? </label><br>
+                    <textarea type="q3" name="q3" placeholder="..."></textarea>
+                    <br>
+                    <label for="q4">What do you recommend the lab instructors to do to improve their lab teaching? </label><br>
+                    <textarea type="q4" name="q4" placeholder="..."></textarea>
+                    <br>
+                    <input type="submit" value = "Submit"/>
+                </form>
+            </div>
+        {%else%}
+        <!--If you are an instructor, then you can only view the feedbacks-->
+        <h1 class="text"><b>Feedback from students</b></h1>
+            <table class="feedback">
+                <tr>
+                    <th>Course</th>
+                    <th>What do you like about the instructor teaching?</th>
+                    <th>What do you recommend the instructor to do to improve their teaching?</th>
+                    <th>What do you like about the labs?</th>
+                    <th>What do you recommend the lab instructors to do to improve their lab teaching?</th>
+                </tr>
+                {% for feedback in feedbacks %}
+                <!--Iterate and display all feedbacks-->
+                <tr>
+                    <td> {{ feedback.course_id }} </td>
+                    <td> {{ feedback.q1 }} </td>
+                    <td> {{ feedback.q2 }} </td>
+                    <td> {{ feedback.q3 }} </td>
+                    <td> {{ feedback.q4 }} </td>
+                </tr>
+
+                {% endfor %} 
+            </table>
+        {%endif%}
+        {% endblock %}
+    </body>
+
+</html>
