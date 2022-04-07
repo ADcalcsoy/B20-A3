@@ -580,6 +580,4 @@ def add_account(info):
 
 
 
-
-app.run(debug=True)
 db.create_all()
